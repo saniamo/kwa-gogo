@@ -1484,7 +1484,7 @@ footer{padding:4rem 6vw !important;}
 
       <div class="price-card">
         <h3>Africa linked scale</h3>
-        <p class="note">For folks whose income is linked to an Afrikan economy and who have reduced access to monetary resources.</p>
+        <p class="note">For folks whose income is linked to an African economy and who have reduced access to monetary resources.</p>
 
         <div class="tier">
           <span>Student / under 20</span>
@@ -1576,7 +1576,7 @@ footer{padding:4rem 6vw !important;}
       </div>
 
       <form class="application-form" id="kwaGogoForm"
-            action="YOUR_POWER_AUTOMATE_HTTP_ENDPOINT"
+            action="https://script.google.com/macros/s/AKfycbzfHSbeLvnruDYSxbGb8PI7sAzeuoiPM4QUYt0tqWchSQuornR0fgTcsK-ql-gWyIyWWA/exec"
             method="POST">
 
         <input type="hidden" name="submitted_at" id="submitted_at">
@@ -1797,11 +1797,38 @@ footer{padding:4rem 6vw !important;}
       }
 
       try {
-        const response = await fetch(endpoint, {
+        // Google Apps Script web apps accept a simple URL-encoded POST here.
+        // We intentionally use no-cors because the Google endpoint does not
+        // expose a browser-readable CORS response. A successful fetch means
+        // the request was handed off to the Apps Script endpoint.
+        const payload = new URLSearchParams();
+        payload.append('submitted_at', submittedAt.value);
+        payload.append('source', 'Kwa Gogo website');
+        payload.append('name', form.elements.name.value.trim());
+        payload.append('email', form.elements.email.value.trim());
+        payload.append('location', form.elements.location.value.trim());
+        payload.append('preferred_arrival', form.elements.preferred_arrival.value);
+        payload.append('requested_days', form.elements.requested_days.value);
+        payload.append('reflection', form.elements.reflection.value.trim());
+
+        const eligibility = Array.from(form.querySelectorAll('input[name="eligibility[]"]:checked'))
+          .map(input => input.value);
+        payload.append('eligibility', eligibility.join(', '));
+        payload.append('eligibility_other', form.elements.eligibility_other.value.trim());
+        payload.append('dietary_needs', form.elements.dietary_needs.value.trim());
+        payload.append('accessibility_needs', form.elements.accessibility_needs.value.trim());
+
+        const contribution = form.querySelector('input[name="contribution"]:checked');
+        payload.append('contribution', contribution ? contribution.value : '');
+        payload.append('additional_notes', form.elements.additional_notes.value.trim());
+
+        await fetch(endpoint, {
           method: 'POST',
-          body: new FormData(form)
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body: payload.toString()
         });
-        if (!response.ok) throw new Error('Submission failed');
+
         form.reset();
         otherWrap.hidden = true;
         status.textContent = 'Thank you. We will review your application and get back to you within 48 hours.';
