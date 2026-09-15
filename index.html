@@ -1052,6 +1052,19 @@ summary:focus-visible{
   outline:2px solid var(--accent);
   outline-offset:2px;
 }
+
+  .form-success {
+    margin-top: 1.5rem;
+    padding: 1.2rem 1.4rem;
+    border-left: 4px solid #ef5b45;
+    background: rgba(255,255,255,.55);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  .application-form button:disabled {
+    opacity: .65;
+    cursor: wait;
+  }
 </style>
 
 <base target="_blank">
@@ -1576,7 +1589,7 @@ footer{padding:4rem 6vw !important;}
       </div>
 
       <form class="application-form" id="kwaGogoForm"
-            action="https://script.google.com/macros/s/AKfycbzfHSbeLvnruDYSxbGb8PI7sAzeuoiPM4QUYt0tqWchSQuornR0fgTcsK-ql-gWyIyWWA/exec"
+            action="https://script.google.com/macros/s/AKfycbzzf0CxzovQQ9PHnO7X7cR0F_5c9I-n4bxg4qWJboRMCR8celSQh_hLqng2Q3mQK__w2g/exec"
             method="POST">
 
         <input type="hidden" name="submitted_at" id="submitted_at">
@@ -1776,6 +1789,19 @@ footer{padding:4rem 6vw !important;}
   const otherInput = document.getElementById('eligibility-other');
   const status = document.getElementById('formStatus');
   const submittedAt = document.getElementById('submitted_at');
+  const submitButton = form ? form.querySelector('button[type="submit"]') : null;
+
+  // Submit into a hidden iframe rather than using fetch().
+  // This avoids the browser CORS issue with Google Apps Script while
+  // keeping the visitor on the Kwa Gogo page.
+  const iframe = document.createElement('iframe');
+  iframe.name = 'kwaGogoSubmissionFrame';
+  iframe.style.display = 'none';
+  iframe.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(iframe);
+
+  let submissionStarted = false;
+  let confirmationShown = false;
 
   if (otherCheck) {
     otherCheck.addEventListener('change', function () {
@@ -1784,57 +1810,72 @@ footer{padding:4rem 6vw !important;}
     });
   }
 
+  iframe.addEventListener('load', function () {
+    if (!submissionStarted || confirmationShown) return;
+
+    confirmationShown = true;
+
+    form.reset();
+    if (otherWrap) otherWrap.hidden = true;
+
+    const confirmation = document.createElement('div');
+    confirmation.className = 'form-success';
+    confirmation.setAttribute('role', 'status');
+    confirmation.setAttribute('aria-live', 'polite');
+    confirmation.textContent = 'Thank you. We will review your application and get back to you within 48 hours.';
+
+    form.style.display = 'none';
+    form.insertAdjacentElement('afterend', confirmation);
+
+    status.textContent = '';
+  });
+
   if (form) {
-    form.addEventListener('submit', async function (event) {
+    form.addEventListener('submit', function (event) {
       event.preventDefault();
-      submittedAt.value = new Date().toISOString();
-      status.textContent = 'Sending…';
 
       const endpoint = form.getAttribute('action');
+
       if (!endpoint || endpoint === 'YOUR_POWER_AUTOMATE_HTTP_ENDPOINT') {
         status.textContent = 'The form is ready, but the submission connection still needs to be added.';
         return;
       }
 
-      try {
-        // Google Apps Script web apps accept a simple URL-encoded POST here.
-        // We intentionally use no-cors because the Google endpoint does not
-        // expose a browser-readable CORS response. A successful fetch means
-        // the request was handed off to the Apps Script endpoint.
-        const payload = new URLSearchParams();
-        payload.append('submitted_at', submittedAt.value);
-        payload.append('source', 'Kwa Gogo website');
-        payload.append('name', form.elements.name.value.trim());
-        payload.append('email', form.elements.email.value.trim());
-        payload.append('location', form.elements.location.value.trim());
-        payload.append('preferred_arrival', form.elements.preferred_arrival.value);
-        payload.append('requested_days', form.elements.requested_days.value);
-        payload.append('reflection', form.elements.reflection.value.trim());
+      submittedAt.value = new Date().toISOString();
+      status.textContent = 'Sending…';
+      submissionStarted = true;
+      confirmationShown = false;
 
-        const eligibility = Array.from(form.querySelectorAll('input[name="eligibility[]"]:checked'))
-          .map(input => input.value);
-        payload.append('eligibility', eligibility.join(', '));
-        payload.append('eligibility_other', form.elements.eligibility_other.value.trim());
-        payload.append('dietary_needs', form.elements.dietary_needs.value.trim());
-        payload.append('accessibility_needs', form.elements.accessibility_needs.value.trim());
-
-        const contribution = form.querySelector('input[name="contribution"]:checked');
-        payload.append('contribution', contribution ? contribution.value : '');
-        payload.append('additional_notes', form.elements.additional_notes.value.trim());
-
-        await fetch(endpoint, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-          body: payload.toString()
-        });
-
-        form.reset();
-        otherWrap.hidden = true;
-        status.textContent = 'Thank you. We will review your application and get back to you within 48 hours.';
-      } catch (error) {
-        status.textContent = 'Something went wrong. Please email sema.tawarar@gmail.com and we will help you from there.';
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending…';
       }
+
+      // Send the form directly to the Google Apps Script endpoint.
+      // The hidden iframe prevents the page from navigating away.
+      form.target = iframe.name;
+      HTMLFormElement.prototype.submit.call(form);
+
+      // If the browser does not report the iframe load for any reason,
+      // do not leave the visitor stuck forever.
+      setTimeout(function () {
+        if (!confirmationShown && submissionStarted) {
+          confirmationShown = true;
+
+          form.reset();
+          if (otherWrap) otherWrap.hidden = true;
+
+          const confirmation = document.createElement('div');
+          confirmation.className = 'form-success';
+          confirmation.setAttribute('role', 'status');
+          confirmation.setAttribute('aria-live', 'polite');
+          confirmation.textContent = 'Thank you. We will review your application and get back to you within 48 hours.';
+
+          form.style.display = 'none';
+          form.insertAdjacentElement('afterend', confirmation);
+          status.textContent = '';
+        }
+      }, 5000);
     });
   }
 })();
