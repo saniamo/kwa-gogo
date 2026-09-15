@@ -1055,11 +1055,41 @@ summary:focus-visible{
 
   .form-success {
     margin-top: 1.5rem;
-    padding: 1.2rem 1.4rem;
-    border-left: 4px solid #ef5b45;
-    background: rgba(255,255,255,.55);
-    font-size: 1.05rem;
+    padding: 2.5rem 2rem;
+    border: 2px solid #ef5b45;
+    background: #fff0dc;
+    text-align: center;
+    position: relative;
+    color: #173f3b;
+  }
+
+  .form-success::before {
+    content: "APPLICATION RECEIVED";
+    display: block;
+    margin-bottom: 1rem;
+    color: #ef5b45;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+  }
+
+  .form-success strong {
+    display: block;
+    margin-bottom: .65rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2rem;
+    line-height: 1.15;
+    font-weight: 400;
+    color: #173f3b;
+  }
+
+  .form-success span {
+    display: block;
+    max-width: 520px;
+    margin: 0 auto;
+    font-size: 1rem;
     line-height: 1.6;
+    color: #173f3b;
   }
   .application-form button:disabled {
     opacity: .65;
@@ -1833,8 +1863,9 @@ footer{padding:4rem 6vw !important;}
       confirmation.className = 'form-success';
       confirmation.setAttribute('role', 'status');
       confirmation.setAttribute('aria-live', 'polite');
-      confirmation.textContent =
-        'Thank you. We will review your application and get back to you within 48 hours.';
+      confirmation.innerHTML =
+        '<strong>Thank you.</strong>' +
+        '<span>We will review your application and get back to you within 48 hours.</span>';
 
       if (applyForm) {
         applyForm.replaceWith(confirmation);
