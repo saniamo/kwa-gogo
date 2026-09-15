@@ -1055,6 +1055,162 @@ summary:focus-visible{
 </style>
 
 <base target="_blank">
+
+<style id="kwa-gogo-creative-art-direction">
+/* KWA GOGO: creative art direction only. Original words/content preserved. */
+:root{
+  --bg:#fff8ea !important;
+  --bg-2:#f5df9f !important;
+  --ink:#173f3b !important;
+  --ink-soft:#405b55 !important;
+  --muted:#68756e !important;
+  --accent:#ef5b45 !important;
+  --accent-soft:#ffd05a !important;
+  --line:#d9c69d !important;
+  --paper:#fffdf7 !important;
+  --sea:#087f87 !important;
+  --leaf:#587653 !important;
+}
+
+/* A little more human, less design-system-y. */
+body{font-family:Arial,Helvetica,sans-serif !important;background:var(--bg) !important;color:var(--ink) !important;}
+h1,h2,h3,.serif,nav .logo,.about-photo figcaption,.interlude-caption,.residency-quote blockquote,.quote blockquote{font-family:Georgia,'Times New Roman',serif !important;}
+
+nav{background:rgba(255,248,234,.94) !important;border-bottom:1px solid rgba(23,63,59,.18) !important;backdrop-filter:none !important;}
+nav .logo{font-size:1.45rem !important;}
+nav .logo em{color:var(--accent) !important;}
+nav ul{gap:1.5rem !important;}
+nav a{font-size:.8rem !important;}
+
+/* HERO: let the existing video do the work. */
+.hero{min-height:92vh !important;padding:7rem 5vw 5rem !important;}
+.hero::before{background:#102f2d !important;opacity:.38 !important;}
+.hero h1{font-family:Georgia,'Times New Roman',serif !important;font-size:clamp(4.8rem,15vw,12rem) !important;line-height:.82 !important;letter-spacing:-.055em !important;max-width:9ch !important;}
+.hero h1 em{color:#ffd05a !important;}
+.hero .kicker{color:#fff5dc !important;}
+.hero p.sub{color:#fff5dc !important;max-width:31rem !important;font-size:1.1rem !important;}
+.btn{border-radius:999px !important;padding:.85rem 1.55rem !important;}
+.btn-solid{background:var(--accent) !important;border-color:var(--accent) !important;}
+.btn-solid:hover{background:#d94631 !important;}
+.hero .scroll-hint{color:#fff5dc !important;}
+
+/* GENERAL RHYTHM */
+section{padding:7.5rem 6vw !important;}
+.label{font-family:Arial,Helvetica,sans-serif !important;color:var(--sea) !important;letter-spacing:.14em !important;}
+h2{font-family:Georgia,'Times New Roman',serif !important;font-size:clamp(2.1rem,4.4vw,3.7rem) !important;}
+
+/* ABOUT: photo feels placed in the house, not boxed into a grid. */
+#about{padding-top:8rem !important;padding-bottom:7rem !important;}
+#about .two{align-items:center !important;}
+#about .two > div:first-child{position:relative !important;top:auto !important;}
+.about-photo{max-width:22rem !important;margin-top:3.5rem !important;margin-left:4rem !important;transform:rotate(2deg) !important;}
+.about-photo img{aspect-ratio:auto !important;}
+.about-photo figcaption{background:#ffd05a !important;border:0 !important;color:var(--ink) !important;padding:.45rem .7rem !important;right:-1.4rem !important;bottom:-1rem !important;transform:rotate(-3deg) !important;}
+#about .two > div:last-child{padding-top:0 !important;}
+
+/* QUOTE: a bright pause rather than a corporate callout. */
+.quote{background:#f5df9f !important;position:relative !important;overflow:hidden !important;padding:6.5rem 6vw !important;}
+.quote::before{content:"“";position:absolute;left:4vw;top:-1rem;font:14rem/1 Georgia,serif;color:rgba(239,91,69,.14);pointer-events:none;}
+.quote::after{right:7vw !important;top:auto !important;bottom:2.5rem !important;width:4rem !important;height:4rem !important;background:transparent !important;border:4px solid var(--accent) !important;border-radius:50% !important;}
+.quote .frame{position:relative;z-index:1 !important;}
+.quote blockquote{font-size:clamp(1.7rem,3.4vw,2.65rem) !important;}
+.quote cite{font-family:Arial,Helvetica,sans-serif !important;text-transform:none !important;letter-spacing:0 !important;}
+
+/* RESIDENCY: make the long-form writing feel like a magazine spread. */
+#residency{background:#fff8ea !important;padding-top:8.5rem !important;padding-bottom:7rem !important;}
+#residency .wrap{position:relative !important;}
+#residency h2{max-width:13ch !important;}
+#residency .residency-intro{font-size:1.35rem !important;max-width:30ch !important;}
+#residency > .wrap > div[style*="2.5rem"]{max-width:52rem !important;margin-left:8vw !important;}
+#residency > .wrap > div[style*="2.5rem"] p:first-child::first-letter{color:var(--accent) !important;}
+.residency-quote{margin-left:22vw !important;max-width:42rem !important;border-top:3px solid var(--accent) !important;}
+.residency-quote blockquote{font-size:1.5rem !important;}
+#residency > .wrap > div[style*="4rem"]{margin-left:5vw !important;max-width:50rem !important;}
+
+/* VIDEO: let the coast interrupt the page. */
+.interlude{min-height:72vh !important;}
+.interlude::before{background:#103a36 !important;opacity:.12 !important;}
+.interlude .interlude-caption{background:#ffd05a !important;color:var(--ink) !important;padding:.65rem 1rem !important;margin:0 0 2.5rem 6vw !important;transform:rotate(-2deg) !important;}
+
+/* WHO IT'S FOR: vibrant, but all text remains on one controlled dark field. */
+.elig{background:#087f87 !important;color:#fff8ea !important;padding:8rem 6vw !important;overflow:hidden !important;}
+.elig::before{display:none !important;}
+.elig::after{right:7vw !important;top:4rem !important;width:6rem !important;height:6rem !important;border:5px solid #ffd05a !important;}
+.elig .wrap{position:relative !important;z-index:2 !important;}
+.elig .label{color:#ffd05a !important;}
+.elig h2{color:#fff8ea !important;max-width:13ch !important;}
+.elig h2 em{color:#ffd05a !important;}
+.elig .lead{color:#fff8ea !important;max-width:47ch !important;}
+.elig-list{max-width:58rem !important;margin-top:3.2rem !important;}
+.elig-list li{font-size:1.03rem !important;padding:1.15rem 3rem !important;border-top:1px solid rgba(255,248,234,.32) !important;}
+.elig-list li::before{left:1rem !important;top:1.6rem !important;width:9px !important;height:9px !important;background:#ffd05a !important;}
+.elig-list li:first-child{border-top:1px solid rgba(255,248,234,.32) !important;}
+.elig p[style*="f0dcd7"]{color:#fff8ea !important;}
+
+/* DETAILS: image gets room to breathe. */
+#details{padding-top:8.5rem !important;}
+.details-grid{grid-template-columns:minmax(0,.9fr) minmax(300px,.8fr) !important;gap:6rem !important;align-items:center !important;}
+.details-grid img{aspect-ratio:4/5 !important;object-fit:cover !important;transform:rotate(-1.5deg) !important;box-shadow:18px 18px 0 #f5df9f !important;}
+.details-list li{padding-left:3.2rem !important;margin-bottom:2.2rem !important;}
+.details-list li::before{color:var(--accent) !important;font-weight:700 !important;}
+
+/* PRICING: contribution, not corporate pricing cards. */
+.pricing{background:#f5df9f !important;overflow:hidden !important;}
+.pricing::before{width:9rem !important;height:7px !important;background:var(--accent) !important;}
+.pricing .scale-note{border-left:3px solid var(--sea) !important;}
+.price-grid{margin-top:4rem !important;gap:0 5rem !important;}
+.price-card:first-child{border-right:2px solid rgba(23,63,59,.2) !important;}
+.tier{padding:1rem 0 !important;border-bottom:1px solid rgba(23,63,59,.2) !important;}
+.tier b{color:var(--accent) !important;font-size:1.05rem !important;}
+
+/* APPLICATION: welcoming and open, not a form dashboard. */
+.apply{background:#fffdf7 !important;padding-top:8.5rem !important;}
+.apply h2{font-size:clamp(2.8rem,6vw,5rem) !important;max-width:12ch !important;}
+.apply .lead{max-width:45rem !important;}
+.apply .steps{max-width:55rem !important;margin-top:3.5rem !important;}
+.step{padding:1.8rem 0 1.8rem 4.5rem !important;}
+.step .num{color:var(--accent) !important;}
+.step h3{font-family:Georgia,'Times New Roman',serif !important;font-style:italic !important;font-size:1.25rem !important;}
+.apply-form{border-top:3px solid var(--sea) !important;}
+.form-submit button{border-radius:999px !important;background:var(--accent) !important;}
+
+/* READING: lighter, looser ending before FAQ. */
+.reading{background:#fff8ea !important;padding-top:6rem !important;}
+.reading li{padding:1rem 0 !important;}
+.mark-quote{font-family:Georgia,'Times New Roman',serif !important;font-size:clamp(1.3rem,2.5vw,1.65rem) !important;}
+
+/* FAQ: quiet again, so the louder sections have somewhere to land. */
+.faq{background:#fffdf7 !important;padding-top:8rem !important;}
+.faq .wrap{max-width:820px !important;}
+.faq details{padding:1.5rem 0 !important;border-bottom:1px solid var(--line) !important;}
+.faq summary{font-family:Georgia,'Times New Roman',serif !important;font-style:italic !important;font-size:1.2rem !important;}
+.faq summary::after{color:var(--accent) !important;}
+
+footer{background:#173f3b !important;color:#fff0d8 !important;}
+footer .logo em{color:#ffd05a !important;}
+footer a{color:#fff8ea !important;}
+
+/* Keep every decorative thing out of the text layer. */
+.quote::before,.quote::after,.elig::after,.pricing::before{pointer-events:none !important;z-index:0 !important;}
+.quote .frame,.pricing .wrap,.elig .wrap{position:relative !important;z-index:1 !important;}
+
+@media(max-width:860px){
+  section{padding:5.5rem 6vw !important;}
+  #about .two > div:first-child{position:static !important;}
+  .about-photo{margin-left:1rem !important;max-width:17rem !important;}
+  #residency > .wrap > div[style*="2.5rem"]{margin-left:0 !important;}
+  .residency-quote{margin-left:0 !important;}
+  #residency > .wrap > div[style*="4rem"]{margin-left:0 !important;}
+  .details-grid{grid-template-columns:1fr !important;gap:3rem !important;}
+  .details-grid img{max-width:75% !important;margin-left:auto !important;margin-right:auto !important;}
+  .price-card:first-child{border-right:0 !important;border-bottom:2px solid rgba(23,63,59,.2) !important;padding-bottom:2rem !important;margin-bottom:2rem !important;}
+  .price-card:last-child{padding-left:0 !important;}
+  .elig::after{width:3.5rem !important;height:3.5rem !important;top:2rem !important;}
+  .hero{min-height:88vh !important;}
+  .hero h1{max-width:7ch !important;}
+}
+</style>
+
 </head>
 
 <body>
