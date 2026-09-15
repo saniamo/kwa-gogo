@@ -1585,7 +1585,6 @@ footer{padding:4rem 6vw !important;}
         <p class="label">Fill this form</p>
         <h3 id="application-form-title">A few things we'd like to know.</h3>
         <p>Keep it simple. We only ask for what helps us understand whether the house is a good fit and how to make your stay possible.</p>
-        <p class="form-note">Once you submit, we will review your application and get back to you within 48 hours.</p>
       </div>
 
       <form class="application-form" id="kwaGogoForm"
@@ -1791,17 +1790,13 @@ footer{padding:4rem 6vw !important;}
   const submittedAt = document.getElementById('submitted_at');
   const submitButton = form ? form.querySelector('button[type="submit"]') : null;
 
-  // Submit into a hidden iframe rather than using fetch().
-  // This avoids the browser CORS issue with Google Apps Script while
-  // keeping the visitor on the Kwa Gogo page.
+  // Google Apps Script receives the form through a hidden iframe so the
+  // visitor stays on this page.
   const iframe = document.createElement('iframe');
   iframe.name = 'kwaGogoSubmissionFrame';
   iframe.style.display = 'none';
   iframe.setAttribute('aria-hidden', 'true');
   document.body.appendChild(iframe);
-
-  let submissionStarted = false;
-  let confirmationShown = false;
 
   if (otherCheck) {
     otherCheck.addEventListener('change', function () {
@@ -1809,26 +1804,6 @@ footer{padding:4rem 6vw !important;}
       if (!this.checked) otherInput.value = '';
     });
   }
-
-  iframe.addEventListener('load', function () {
-    if (!submissionStarted || confirmationShown) return;
-
-    confirmationShown = true;
-
-    form.reset();
-    if (otherWrap) otherWrap.hidden = true;
-
-    const confirmation = document.createElement('div');
-    confirmation.className = 'form-success';
-    confirmation.setAttribute('role', 'status');
-    confirmation.setAttribute('aria-live', 'polite');
-    confirmation.textContent = 'Thank you. We will review your application and get back to you within 48 hours.';
-
-    form.style.display = 'none';
-    form.insertAdjacentElement('afterend', confirmation);
-
-    status.textContent = '';
-  });
 
   if (form) {
     form.addEventListener('submit', function (event) {
@@ -1842,40 +1817,34 @@ footer{padding:4rem 6vw !important;}
       }
 
       submittedAt.value = new Date().toISOString();
-      status.textContent = 'Sending…';
-      submissionStarted = true;
-      confirmationShown = false;
 
+      // Prevent a second submission.
       if (submitButton) {
         submitButton.disabled = true;
         submitButton.textContent = 'Sending…';
       }
 
-      // Send the form directly to the Google Apps Script endpoint.
-      // The hidden iframe prevents the page from navigating away.
+      // Submit to Google Apps Script without leaving the Kwa Gogo page.
       form.target = iframe.name;
       HTMLFormElement.prototype.submit.call(form);
 
-      // If the browser does not report the iframe load for any reason,
-      // do not leave the visitor stuck forever.
+      // Once the application has been handed off, replace the questions
+      // with the confirmation. This keeps the page from showing a thank-you
+      // message underneath a completed form.
       setTimeout(function () {
-        if (!confirmationShown && submissionStarted) {
-          confirmationShown = true;
+        form.reset();
+        if (otherWrap) otherWrap.hidden = true;
 
-          form.reset();
-          if (otherWrap) otherWrap.hidden = true;
+        const confirmation = document.createElement('div');
+        confirmation.className = 'form-success';
+        confirmation.setAttribute('role', 'status');
+        confirmation.setAttribute('aria-live', 'polite');
+        confirmation.textContent = 'Thank you. We will review your application and get back to you within 48 hours.';
 
-          const confirmation = document.createElement('div');
-          confirmation.className = 'form-success';
-          confirmation.setAttribute('role', 'status');
-          confirmation.setAttribute('aria-live', 'polite');
-          confirmation.textContent = 'Thank you. We will review your application and get back to you within 48 hours.';
-
-          form.style.display = 'none';
-          form.insertAdjacentElement('afterend', confirmation);
-          status.textContent = '';
-        }
-      }, 5000);
+        form.style.display = 'none';
+        form.insertAdjacentElement('afterend', confirmation);
+        status.textContent = '';
+      }, 1200);
     });
   }
 })();
