@@ -1783,6 +1783,7 @@ footer{padding:4rem 6vw !important;}
 <script>
 (function () {
   const form = document.getElementById('kwaGogoForm');
+  const applyForm = form ? form.closest('.apply-form') : null;
   const otherCheck = document.getElementById('eligibility-other-check');
   const otherWrap = document.getElementById('eligibility-other-wrap');
   const otherInput = document.getElementById('eligibility-other');
@@ -1790,8 +1791,8 @@ footer{padding:4rem 6vw !important;}
   const submittedAt = document.getElementById('submitted_at');
   const submitButton = form ? form.querySelector('button[type="submit"]') : null;
 
-  // Google Apps Script receives the form through a hidden iframe so the
-  // visitor stays on this page.
+  // Hidden iframe lets the application be submitted to Google Apps Script
+  // without navigating away from the Kwa Gogo page.
   const iframe = document.createElement('iframe');
   iframe.name = 'kwaGogoSubmissionFrame';
   iframe.style.display = 'none';
@@ -1818,22 +1819,19 @@ footer{padding:4rem 6vw !important;}
 
       submittedAt.value = new Date().toISOString();
 
-      // Prevent a second submission.
       if (submitButton) {
         submitButton.disabled = true;
         submitButton.textContent = 'Sending…';
       }
 
-      // Submit to Google Apps Script without leaving the Kwa Gogo page.
+      // Send the application first.
       form.target = iframe.name;
       HTMLFormElement.prototype.submit.call(form);
 
-      // Once the application has been handed off, replace the questions
-      // with the confirmation. This keeps the page from showing a thank-you
-      // message underneath a completed form.
-      setTimeout(function () {
-        form.reset();
-        if (otherWrap) otherWrap.hidden = true;
+      // Immediately replace the entire form area with the confirmation.
+      // This prevents the completed questions from remaining visible.
+      if (applyForm) {
+        applyForm.style.display = 'none';
 
         const confirmation = document.createElement('div');
         confirmation.className = 'form-success';
@@ -1841,10 +1839,8 @@ footer{padding:4rem 6vw !important;}
         confirmation.setAttribute('aria-live', 'polite');
         confirmation.textContent = 'Thank you. We will review your application and get back to you within 48 hours.';
 
-        form.style.display = 'none';
-        form.insertAdjacentElement('afterend', confirmation);
-        status.textContent = '';
-      }, 1200);
+        applyForm.insertAdjacentElement('afterend', confirmation);
+      }
     });
   }
 })();
