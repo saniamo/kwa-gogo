@@ -1209,8 +1209,90 @@ footer a{color:#fff8ea !important;}
   .hero{min-height:88vh !important;}
   .hero h1{max-width:7ch !important;}
 }
+
+
+/* COMPACT EDITORIAL PASS: shorter pages, calmer type scale, real application form. */
+body{font-size:16px !important;line-height:1.62 !important;}
+.wrap{max-width:1120px !important;}
+section{padding-top:5.2rem !important;padding-bottom:5.2rem !important;}
+h1{font-size:clamp(3.2rem,7vw,6.8rem) !important;line-height:.92 !important;}
+h2{font-size:clamp(2rem,4vw,3.8rem) !important;line-height:1.02 !important;margin-bottom:1.1rem !important;}
+h3{line-height:1.15 !important;}
+p.lead{font-size:1.12rem !important;line-height:1.55 !important;}
+.hero{min-height:82vh !important;}
+.hero .hero-inner{padding-top:8vh !important;padding-bottom:7vh !important;}
+.about{padding-top:5rem !important;padding-bottom:5rem !important;}
+.about-grid{gap:3.5rem !important;}
+.about-photo{max-width:19rem !important;margin-top:1rem !important;margin-left:2rem !important;}
+.quote{padding:5rem 6vw !important;}
+#residency{padding-top:5.5rem !important;padding-bottom:5rem !important;}
+#residency .residency-intro{font-size:1.15rem !important;max-width:44rem !important;}
+#residency > .wrap > div[style*="2.5rem"]{margin-left:5vw !important;max-width:56rem !important;}
+.residency-quote{margin:2.5rem 0 2.5rem 12vw !important;max-width:40rem !important;}
+.residency-quote blockquote{font-size:1.28rem !important;}
+#residency > .wrap > div[style*="4rem"]{margin-left:3vw !important;max-width:58rem !important;}
+.interlude{min-height:55vh !important;}
+.elig{padding:5.5rem 6vw !important;}
+.elig-list{margin-top:2rem !important;}
+.elig-list li{font-size:1rem !important;padding:1rem 2.5rem !important;}
+#details{padding-top:5.5rem !important;padding-bottom:5.5rem !important;}
+.details-grid{gap:4rem !important;}
+.details-grid img{max-height:600px !important;}
+.details-list li{margin-bottom:1.4rem !important;}
+.pricing{padding:5.5rem 6vw 6rem !important;}
+.price-grid{margin-top:2.5rem !important;gap:0 4rem !important;}
+.tier{padding:.75rem 0 !important;}
+.apply{padding-top:5.5rem !important;padding-bottom:5.5rem !important;}
+.apply h2{font-size:clamp(2.2rem,4.5vw,4rem) !important;max-width:14ch !important;}
+.apply .steps{margin-top:2rem !important;margin-bottom:2.5rem !important;}
+.step{padding:1.25rem 0 1.25rem 3.8rem !important;}
+.apply-form{margin-top:3rem !important;padding-top:1.6rem !important;grid-template-columns:minmax(210px,.65fr) minmax(0,1.35fr) !important;gap:2.5rem !important;}
+.form-intro h3{font-size:1.55rem !important;}
+.form-intro p{font-size:.95rem !important;}
+.application-form{display:grid !important;grid-template-columns:1fr 1fr !important;gap:1rem 1.2rem !important;}
+.application-form .field{margin:0 !important;}
+.application-form .field.full,.application-form fieldset,.application-form .form-submit,.application-form .required-note{grid-column:1 / -1 !important;}
+.application-form label,.application-form legend{font-size:.9rem !important;}
+.application-form input,.application-form select,.application-form textarea{font-size:.95rem !important;padding:.7rem .75rem !important;}
+.application-form textarea{min-height:7rem !important;}
+.application-form fieldset{margin:0 !important;padding:1rem 0 !important;}
+.check-row{gap:.45rem 1rem !important;}
+.form-submit{margin-top:.3rem !important;}
+.form-submit button{padding:.8rem 1.2rem !important;}
+.form-note{font-weight:600 !important;color:var(--accent) !important;}
+.reading{padding-top:4.5rem !important;padding-bottom:4.5rem !important;}
+.faq{padding-top:5rem !important;padding-bottom:5rem !important;}
+.faq details{padding:1.1rem 0 !important;}
+footer{padding:4rem 6vw !important;}
+@media (max-width:800px){
+  section{padding-top:4rem !important;padding-bottom:4rem !important;}
+  .hero{min-height:75vh !important;}
+  .about-grid,.details-grid,.apply-form{grid-template-columns:1fr !important;}
+  .about-photo{max-width:17rem !important;margin:1rem auto 0 !important;}
+  .residency-quote{margin-left:0 !important;}
+  .application-form{grid-template-columns:1fr !important;}
+  .application-form .field.full,.application-form fieldset,.application-form .form-submit,.application-form .required-note{grid-column:auto !important;}
+  .price-grid{grid-template-columns:1fr !important;}
+  .price-card:first-child{border-right:0 !important;border-bottom:1px solid rgba(23,63,59,.2) !important;padding-bottom:2rem !important;margin-bottom:2rem !important;}
+}
 </style>
 
+
+<style id="kwa-gogo-form-refinement">
+  .apply-form { margin-top: 2.5rem !important; padding: 2.2rem 0 !important; }
+  .form-intro h3 { font-size: clamp(1.8rem, 3.2vw, 2.7rem) !important; margin-bottom: .7rem !important; }
+  .form-intro p { margin-bottom: .65rem !important; }
+  .application-form { margin-top: 1.4rem !important; gap: .9rem 1.2rem !important; }
+  .application-form .field { margin-bottom: .15rem !important; }
+  .application-form textarea { min-height: 92px !important; }
+  .application-form fieldset { margin: .35rem 0 !important; padding: .9rem 1rem !important; }
+  .application-form legend { margin-bottom: .55rem !important; }
+  .other-field { margin-top: .65rem !important; }
+  @media (min-width: 800px) {
+    .application-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .application-form fieldset, .application-form .full, .application-form .form-submit, .application-form .required-note { grid-column: 1 / -1; }
+  }
+</style>
 </head>
 
 <body>
@@ -1309,7 +1391,7 @@ footer a{color:#fff8ea !important;}
     <div style="margin-top:4rem;">
       <p class="label">What kind of support is available at the residency</p>
 
-      <p style="max-width:48rem;color:#4d4240;">The space has been created for you to slow down and rest with no formal facilitation in place. During the course of your stay you will have access to choose from 2-3 in-person offerings by Afrikan wellbeing practitioners based in or near Kilifi.</p>
+      <p style="max-width:48rem;color:#4d4240;">The space has been created for you to slow down and rest with no formal facilitation in place. During the course of your stay you will have access to choose from 2-3 in-person offerings by African wellbeing practitioners based in or near Kilifi.</p>
     </div>
 
   </div>
@@ -1401,7 +1483,7 @@ footer a{color:#fff8ea !important;}
     <div class="price-grid">
 
       <div class="price-card">
-        <h3>Afrika linked scale</h3>
+        <h3>Africa linked scale</h3>
         <p class="note">For folks whose income is linked to an Afrikan economy and who have reduced access to monetary resources.</p>
 
         <div class="tier">
@@ -1485,7 +1567,107 @@ footer a{color:#fff8ea !important;}
 
     </div>
 
-    <a class="btn btn-solid" href="mailto:sema.tawarar@gmail.com?subject=Kwa%20Gogo%20Residency%20Application">Apply via the form ✉</a>
+    <div class="apply-form" aria-labelledby="application-form-title">
+      <div class="form-intro">
+        <p class="label">Fill this form</p>
+        <h3 id="application-form-title">A few things we'd like to know.</h3>
+        <p>Keep it simple. We only ask for what helps us understand whether the house is a good fit and how to make your stay possible.</p>
+        <p class="form-note">Once you submit, we will review your application and get back to you within 48 hours.</p>
+      </div>
+
+      <form class="application-form" id="kwaGogoForm"
+            action="YOUR_POWER_AUTOMATE_HTTP_ENDPOINT"
+            method="POST">
+
+        <input type="hidden" name="submitted_at" id="submitted_at">
+        <input type="hidden" name="source" value="Kwa Gogo website">
+
+        <p class="required-note">Fields marked * are required.</p>
+
+        <div class="field">
+          <label for="name">Your name *</label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+
+        <div class="field">
+          <label for="location">Where are you based? *</label>
+          <input id="location" name="location" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="arrival">Preferred arrival</label>
+          <input id="arrival" name="preferred_arrival" type="date">
+        </div>
+
+        <div class="field">
+          <label for="days">How many days would you like to stay? *</label>
+          <select id="days" name="requested_days" required>
+            <option value="">Choose</option>
+            <option>7 days</option>
+            <option>8-13 days</option>
+            <option>14 days</option>
+            <option>15-21 days</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label for="why">What brings you to the house, and what are you hoping to make space for? *</label>
+          <textarea id="why" name="reflection" required></textarea>
+        </div>
+
+        <fieldset>
+          <legend>Which of these speaks to your reason for coming?</legend>
+          <div class="check-row">
+            <label><input type="checkbox" name="eligibility[]" value="intergenerational caregiving"> Intergenerational care-giving</label>
+            <label><input type="checkbox" name="eligibility[]" value="care-giving"> Care-giver</label>
+            <label><input type="checkbox" name="eligibility[]" value="chronic illness or pain"> Managing chronic illness / pain</label>
+            <label><input type="checkbox" name="eligibility[]" value="domestic work"> Domestic worker</label>
+            <label><input type="checkbox" name="eligibility[]" value="queer woman"> Queer woman</label>
+            <label><input type="checkbox" name="eligibility[]" value="artist or cultural worker"> Artist / cultural worker</label>
+            <label><input type="checkbox" id="eligibility-other-check" name="eligibility[]" value="other"> Something else</label>
+          </div>
+          <div class="field other-field" id="eligibility-other-wrap" hidden>
+            <label for="eligibility-other">If something else, tell us a little more</label>
+            <input id="eligibility-other" name="eligibility_other" type="text">
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="dietary">Any allergy or dietary needs?</label>
+          <input id="dietary" name="dietary_needs" type="text">
+        </div>
+
+        <div class="field">
+          <label for="accessibility">Any accessibility or accommodation needs?</label>
+          <input id="accessibility" name="accessibility_needs" type="text">
+        </div>
+
+        <fieldset>
+          <legend>Which contribution scale would you like us to consider?</legend>
+          <div class="check-row">
+            <label><input type="radio" name="contribution" value="Africa linked scale"> Africa linked scale</label>
+            <label><input type="radio" name="contribution" value="Global North linked scale"> Global North linked scale</label>
+            <label><input type="radio" name="contribution" value="Need support"> I need support</label>
+            <label><input type="radio" name="contribution" value="Need two tranches"> I need two tranches</label>
+          </div>
+        </fieldset>
+
+        <div class="field full">
+          <label for="support">Anything else we should know to help us understand your application?</label>
+          <textarea id="support" name="additional_notes"></textarea>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit">Send application</button>
+          <span class="form-status" id="formStatus" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+    </div>
 
     <p style="margin-top:1.4rem;font-size:.95rem;color:var(--muted);">
       Questions?
@@ -1536,7 +1718,7 @@ footer a{color:#fff8ea !important;}
 
     <details>
       <summary>Is there facilitation or a programme?</summary>
-      <p>The space has been created for you to slow down and rest with no formal facilitation in place. During the course of your stay you will have access to choose from 2-3 in-person offerings by Afrikan wellbeing practitioners based in or near Kilifi.</p>
+      <p>The space has been created for you to slow down and rest with no formal facilitation in place. During the course of your stay you will have access to choose from 2-3 in-person offerings by African wellbeing practitioners based in or near Kilifi.</p>
     </details>
 
     <details>
@@ -1585,5 +1767,50 @@ footer a{color:#fff8ea !important;}
 
 </footer>
 
+
+<script>
+(function () {
+  const form = document.getElementById('kwaGogoForm');
+  const otherCheck = document.getElementById('eligibility-other-check');
+  const otherWrap = document.getElementById('eligibility-other-wrap');
+  const otherInput = document.getElementById('eligibility-other');
+  const status = document.getElementById('formStatus');
+  const submittedAt = document.getElementById('submitted_at');
+
+  if (otherCheck) {
+    otherCheck.addEventListener('change', function () {
+      otherWrap.hidden = !this.checked;
+      if (!this.checked) otherInput.value = '';
+    });
+  }
+
+  if (form) {
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      submittedAt.value = new Date().toISOString();
+      status.textContent = 'Sending…';
+
+      const endpoint = form.getAttribute('action');
+      if (!endpoint || endpoint === 'YOUR_POWER_AUTOMATE_HTTP_ENDPOINT') {
+        status.textContent = 'The form is ready, but the submission connection still needs to be added.';
+        return;
+      }
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: new FormData(form)
+        });
+        if (!response.ok) throw new Error('Submission failed');
+        form.reset();
+        otherWrap.hidden = true;
+        status.textContent = 'Thank you. We will review your application and get back to you within 48 hours.';
+      } catch (error) {
+        status.textContent = 'Something went wrong. Please email sema.tawarar@gmail.com and we will help you from there.';
+      }
+    });
+  }
+})();
+</script>
 </body>
 </html>
